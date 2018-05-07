@@ -16,14 +16,7 @@ pipeline {
 			 echo 'Unit Tests Are Awesome!'
        sh 'mvn test'
 			}
-		}
-		
-		stage("Send ConsoleLog to Logstash") {
-			steps {
-				echo '---Archive jenkins Console Logs to Elasticsearch----!'				
-				logstashSend failBuild: true, maxLines: 1000
-			}
-		}
+		}		
 	
 	}
 }
