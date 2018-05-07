@@ -1,22 +1,8 @@
-pipeline {
-	agent any
-	
-	stages {
-		stage("Build") {
-			steps {
-				echo '---Build started----!'
-				git 'https://github.com/jeydevops/java-maven-junit-helloworld.git'
-				sh 'mvn clean package -DskipTests=true'
-				//logstashSend failBuild: true, maxLines: 1000
-			}
-		}
-		
-		stage("Testing") {							
-			steps {
-			 echo 'Unit Tests Are Awesome!'
-       sh 'mvn test'
-			}
-		}		
-	
-	}
+env.dockerimagename="devopsbasservice/buildonframework:buildon"
+node {
+   stage ('Build') {
+   //If some other Repository is to be given apart from current repo, provide git URL as below demo....   
+    checkout scm
+    sh 'mvn clean package -DskipTests=True'
+  }   
 }
